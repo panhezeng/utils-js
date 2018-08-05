@@ -58,5 +58,9 @@ npm run dev:example
 
 # 编译插件
 npm run build
+
+# 发版
+npm version patch
+npm publish --access public
 ```
 

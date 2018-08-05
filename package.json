@@ -9,10 +9,10 @@
     "utils",
     "javascript"
   ],
-  "homepage": "https://github.com/panhezeng/utils#readme",
+  "homepage": "https://github.com/panhezeng/utils-js#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panhezeng/utils.git"
+    "url": "git+https://github.com/panhezeng/utils-js.git"
   },
   "files": [
     "dist",
@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "moment": "latest",
+    "xss": "latest"
   },
   "browserslist": [
     "> 1%",
@@ -36,13 +38,14 @@
     "not ie <= 8"
   ],
   "devDependencies": {
+    "@panhezeng/rename-webpack-plugin": "latest",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "change-case": "latest",
-    "webpack": "^4.12.1",
+    "change-case": "^3.0.2",
+    "webpack": "^4.16.4",
     "webpack-cli": "^2.1.5",
     "webpack-dev-server": "^3.1.4"
   }

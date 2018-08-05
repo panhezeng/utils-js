@@ -1,87 +1,36 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Countdown from '../dist/countdown.min'
+//import utils from '../dist/utils-pan'
+import checkUpload from '../dist/check-upload'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {cd: ''}
+    this.state = {file: '上传检查结果展示'}
+    this.handleChange = this.handleChange.bind(this)
+    this.fileInput = React.createRef()
   }
 
-  initCountdown () {
-    if (!this.cdInstance) {
-      this.cdInstance = new Countdown({
-        endTime: new Date().getTime() + 1081000,
-        onUpdate: (data) => {
-          this.setState({
-            cd: `${data.hours}:${data.minutes}:${data.seconds}`
-          })
-        },
-        onComplete: () => {
-          this.setState({
-            cd: 'cd complete'
-          })
-        }
-      })
+  handleChange (event) {
+    const file = this.fileInput.current.files[0]
+    if (file) {
+      this.setState({file: JSON.stringify(checkUpload(file, file.type, 10))})
+    } else {
+      this.setState({file: ''})
     }
-  }
-
-  destroyCountdown () {
-    if (this.cdInstance) {
-      this.cdInstance.clear()
-    }
-    this.cdInstance = null
-  }
-
-  componentDidMount () {
-    this.initCountdown()
-  }
-
-  componentWillUnmount () {
-    this.destroyCountdown()
   }
 
   render () {
     return (
       <div>
-        <h1>
-          cd: {this.state.cd}
-        </h1>
-        <button onClick={() => {
-          if (this.cdInstance) {
-            this.cdInstance.init({
-              endTime: new Date().getTime() + 120000
-            })
-          }
-        }}>
-          update time 00:02:00
-        </button>
-        <button onClick={() => {
-          if (this.cdInstance) {
-            this.cdInstance.clear(false)
-          }
-        }}>
-          pause
-        </button>
-        <button onClick={() => {
-          if (this.cdInstance) {
-            this.cdInstance.start()
-          }
-        }}>
-          continue
-        </button>
-        <button onClick={() => {
-          if (this.cdInstance) {
-            this.cdInstance.clear()
-            this.cdInstance.init({
-              endTime: new Date().getTime() + 60000
-            })
-            this.cdInstance.start()
-          }
-        }}>
-          manual restart 00:01:00
-        </button>
+        <form>
+          <label>
+            Upload file:
+            <input type="file" ref={this.fileInput} onChange={this.handleChange}/>
+          </label>
+        </form>
+        <div>file: {this.state.file}</div>
       </div>
     )
   }
