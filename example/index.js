@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-//import utils from '../dist/utils-pan'
-import checkUpload from '../dist/check-upload'
+// import utils from '../dist/utils-pan'
+import { checkUpload } from '../dist/utils-pan'
+
+// import checkUpload from '../dist/check-upload'
 
 class App extends React.Component {
   constructor (props) {
