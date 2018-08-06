@@ -1,8 +1,8 @@
 module.exports = {
-  checkUpload: require('./check-upload'),
-  textOverflow: require('./text-overflow'),
-  delArrayItemByValue: require('./del-array-item-by-value'),
-  cookies: require('./cookies'),
-  storage: require('./storage'),
-  xss: require('./xss')
+  checkUpload: require('./check-upload.js'),
+  textOverflow: require('./text-overflow.js'),
+  delArrayItemByValue: require('./del-array-item-by-value.js'),
+  cookies: require('./cookies.js'),
+  storage: require('./storage.js'),
+  xss: require('./xss.js')
 }

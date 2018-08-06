@@ -9,7 +9,7 @@ try {
   const files = fs.readdirSync(path.join(__dirname, 'src'))
   files.forEach(function (fileName) {
     const name = fileName.replace('.js', '')
-    externals.push(`./${name}`)
+    externals.push(`./${fileName}`)
     const camelCase = changeCase.camelCase(name)
     entry[camelCase] = `./src/${fileName}`
 
@@ -38,10 +38,7 @@ module.exports = {
   },
   plugins: [
     new RenameWebpackPlugin({naming: 'paramCase'})
-  ],
-  resolve: {
-    extensions: ['.js']
-  }
+  ]
 }
 
 
