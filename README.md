@@ -19,7 +19,7 @@ import utils from '@panhezeng/utils'
 
 import { checkUpload } from '@panhezeng/utils'
 
-import checkUpload from '@panhezeng/utils/check-upload'
+import checkUpload from '@panhezeng/utils/check-upload.js'
 
 ```
 
