@@ -19,7 +19,7 @@ import utils from '@panhezeng/utils'
 
 import { checkUpload } from '@panhezeng/utils'
 
-import checkUpload from '@panhezeng/utils/check-upload.js'
+import checkUpload from '@panhezeng/utils/dist/check-upload.js'
 
 ```
 
@@ -36,7 +36,6 @@ npm run dev:example
 npm run build
 
 # 发版
-npm version patch
-npm publish --access public
+npm version patch && npm publish --access public
 ```
 
