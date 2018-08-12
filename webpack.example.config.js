@@ -28,10 +28,8 @@ const config = {
 }
 
 module.exports = (env, argv) => {
-
   if (argv.mode === 'production') {
     config.plugins.push(new BeforeRunWebpackPlugin({sed: 'react'}))
   }
-
   return config
 }
