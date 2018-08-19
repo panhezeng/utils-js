@@ -19,7 +19,7 @@ class App extends React.Component {
   checkUploadHandle (event) {
     const file = this.fileInput.current.files[0]
     if (file) {
-      this.setState({checkUpload: JSON.stringify(checkUpload(file, file.type, 10))})
+      this.setState({checkUpload: JSON.stringify(checkUpload(file, file.type, 1))})
     } else {
       this.setState({checkUpload: ''})
     }

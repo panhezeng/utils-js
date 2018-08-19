@@ -9,19 +9,30 @@ module.exports = function (file, type = 'image', size = 2048) {
   if (Object.prototype.toString.call(file) !== '[object File]') {
     throw new Error('file参数必须为File数据类型')
   }
-  const isType = new RegExp(`^${type}`).test(file.type)
-  let typeName = '图片'
-  if (new RegExp(/^audio/).test(type)) {
-    typeName = '音频'
-    if (size === 2048) {
-      size = 51200
-    }
-  } else if (new RegExp(/^video/).test(type)) {
-    typeName = '视频'
-    if (size === 2048) {
-      size = 512000
+
+  let isType = true
+  let typeName = file.type
+  if (type) {
+    isType = new RegExp(`^${type}`).test(file.type)
+    switch (type) {
+      case 'image':
+        typeName = '图片'
+        break
+      case 'audio':
+        typeName = '音频'
+        if (size === 2048) {
+          size = 51200
+        }
+        break
+      case 'video':
+        typeName = '视频'
+        if (size === 2048) {
+          size = 512000
+        }
+        break
     }
   }
+
   const isLtSize = file.size / 1024 < size
   const result = {
     message: '',
