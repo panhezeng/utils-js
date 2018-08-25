@@ -3,6 +3,7 @@ module.exports = {
   textOverflow: require('./text-overflow.js'),
   delArrayItemByValue: require('./del-array-item-by-value.js'),
   getArrayItemByValue: require('./get-array-item-by-value.js'),
+  getObjectItemByPath: require('./get-object-item-by-path.js'),
   cookies: require('./cookies.js'),
   storage: require('./storage.js'),
   xss: require('./xss.js')

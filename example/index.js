@@ -5,12 +5,13 @@ import ReactDOM from 'react-dom'
 //import { checkUpload } from '../dist/utils-pan.js'
 
 import checkUpload from '../dist/check-upload.js'
-import textOverflow from '../dist/text-overflow'
+import textOverflow from '../dist/text-overflow.js'
+import getObjectItemByPath from '../dist/get-object-item-by-path.js'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {checkUpload: '上传检查结果展示', textOverflow: '超过3个字省略'}
+    this.state = {checkUpload: '上传检查结果展示', textOverflow: '超过3个字省略', object: {path: 'item'}}
     this.checkUploadHandle = this.checkUploadHandle.bind(this)
     this.textOverflowHandle = this.textOverflowHandle.bind(this)
     this.fileInput = React.createRef()
@@ -40,9 +41,10 @@ class App extends React.Component {
         </form>
         <div>checkUpload: {this.state.checkUpload}</div>
         <button onClick={this.textOverflowHandle}>
-          超过3个加省略符号[0p98765432qc
+          超过3个字加省略符号
         </button>
         <div>textOverflow: {this.state.textOverflow}</div>
+        <div>getObjectItemByPath: {getObjectItemByPath(this.state, 'object.path')}</div>
       </div>
     )
   }
