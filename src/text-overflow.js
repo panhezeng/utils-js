@@ -5,7 +5,7 @@
  * @param ellipsis
  * @returns {*}
  */
-module.exports = function (value, len = 50, ellipsis = '...') {
+module.exports = function textOverflow (value, len = 50, ellipsis = '...') {
   if (String(value).length > len) {
     return String(value).substring(0, len) + ellipsis
   }

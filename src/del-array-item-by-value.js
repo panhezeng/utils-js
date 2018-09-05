@@ -3,7 +3,7 @@
  * @param value 删除与value相等的项
  * @param key 如果有key，则表示数组项是对象，则取对象此key的值和value比较
  */
-module.exports = function (array, value, key) {
+module.exports = function delArrayItemByValue (array, value, key) {
   const delIndex = array.findIndex(function (element) {
     if (key) {
       return (element[key] === value)

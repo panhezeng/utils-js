@@ -5,7 +5,7 @@
  * @param size 单位KB
  * @return {{validate: boolean, message: string, error:number}}
  */
-module.exports = function (file, type = '', size = -1) {
+module.exports = function checkUpload (file, type = '', size = -1) {
   const result = {
     message: '',
     error: 0,
