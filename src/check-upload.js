@@ -14,9 +14,9 @@ module.exports = function checkUpload (file, type = '', size = -1) {
   if (Object.prototype.toString.call(file) === '[object File]') {
     let isType = true
     let typeName = file.type
-    if (type) {
-      isType = new RegExp(`^${type}`).test(file.type)
-      switch (type) {
+    if (file.type && type) {
+      isType = type.split(',').some(value => value && new RegExp(`^${value}`).test(file.type))
+      switch (file.type.split('/')[0]) {
         case 'image':
           typeName = '图片'
           if (size === -1) {
