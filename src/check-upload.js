@@ -2,7 +2,7 @@
  * 检查上传文件时是否满足要求
  * @param file
  * @param type 文件类型
- * @param size 单位KB，默认undefined，不限制大小
+ * @param size 单位KB，默认undefined，文件使用默认限制大小，如果不限制大小则传0
  * @return {{validate: boolean, message: string, error:number}}
  */
 module.exports = function checkUpload (file, type = '', size = undefined) {
@@ -12,6 +12,9 @@ module.exports = function checkUpload (file, type = '', size = undefined) {
     validate: true
   }
   if (Object.prototype.toString.call(file) === '[object File]') {
+    if (size === undefined) {
+      size = 1024000
+    }
     let isType = true
     let typeName = file.type
     if (file.type && type) {
@@ -21,20 +24,17 @@ module.exports = function checkUpload (file, type = '', size = undefined) {
         case 'image':
           typeName = '图片'
           if (size === undefined) {
-            size = 2048
+            size = 10240
           }
           break
         case 'audio':
           typeName = '音频'
           if (size === undefined) {
-            size = 51200
+            size = 102400
           }
           break
         case 'video':
           typeName = '视频'
-          if (size === undefined) {
-            size = 512000
-          }
           break
       }
     }

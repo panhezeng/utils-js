@@ -14,7 +14,7 @@ module.exports = {
    * 检查上传文件时是否满足要求
    * @param file
    * @param type 文件类型
-   * @param size 单位KB，默认undefined，不限制大小
+   * @param size 单位KB，默认undefined，文件使用默认限制大小，如果不限制大小则传0
    * @return {{validate: boolean, message: string, error:number}}
    */
   checkUpload: require('./check-upload.js'),
