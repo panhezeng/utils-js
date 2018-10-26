@@ -21,26 +21,15 @@ module.exports = function checkUpload (file, type = '', size = undefined) {
     if (index !== -1) {
       suffix = file.name.substring(index)
     }
-    let typeName = suffix ? suffix.substring(1) : file.type
+    let typeName = suffix ? suffix.substring(1) : (file.type && file.type.split('/')[0])
     if (file.type && type) {
       isType = type.split(',').some(value => value && (new RegExp(`^${value}`).test(file.type) || new RegExp(`^${value}`).test(suffix)))
-      const fileType = file.type.split('/')[0]
-      switch (fileType) {
-        case 'image':
-          typeName = '图片'
-          if (size === undefined) {
-            size = 10240
-          }
-          break
-        case 'audio':
-          typeName = '音频'
-          if (size === undefined) {
-            size = 102400
-          }
-          break
-        case 'video':
-          typeName = '视频'
-          break
+      if (size === undefined) {
+        if (/^\.(png|jpe?g|gif|svg|webp)/.test(suffix) || /^image/.test(file.type)) {
+          size = 10240
+        } else if (/^\.(ogg|mp3|wav|flac|aac)/.test(suffix) || /^audio/.test(file.type)) {
+          size = 102400
+        }
       }
     }
     let isLtSize = true
