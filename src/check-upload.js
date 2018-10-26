@@ -16,9 +16,14 @@ module.exports = function checkUpload (file, type = '', size = undefined) {
       size = 1024000
     }
     let isType = true
-    let typeName = file.type
+    let suffix = ''
+    let index = file.name.lastIndexOf('.')
+    if (index !== -1) {
+      suffix = file.name.substring(index)
+    }
+    let typeName = suffix ? suffix.substring(1) : file.type
     if (file.type && type) {
-      isType = type.split(',').some(value => value && new RegExp(`^${value}`).test(file.type))
+      isType = type.split(',').some(value => value && (new RegExp(`^${value}`).test(file.type) || new RegExp(`^${value}`).test(suffix)))
       const fileType = file.type.split('/')[0]
       switch (fileType) {
         case 'image':
