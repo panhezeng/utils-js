@@ -23,7 +23,10 @@ module.exports = function checkUpload (file, type = '', size = undefined) {
     }
     let typeName = suffix ? suffix.substring(1) : (file.type && file.type.split('/')[0])
     if (file.type && type) {
-      isType = type.split(',').some(value => value && (new RegExp(`^${value}`).test(file.type) || new RegExp(`^${value}`).test(suffix)))
+      isType = type.split(',').some(value => {
+        value = value.trim()
+        return value && (new RegExp(`^${value}`).test(file.type) || new RegExp(`^${value}`).test(suffix))
+      })
       if (size === undefined) {
         if (/^\.(png|jpe?g|gif|svg|webp)/.test(suffix) || /^image/.test(file.type)) {
           size = 10240
