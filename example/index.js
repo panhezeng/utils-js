@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom'
 import checkUpload from '../dist/check-upload.js'
 import textOverflow from '../dist/text-overflow.js'
 import getObjectItemByPath from '../dist/get-object-item-by-path.js'
+import moment from '../dist/moment.js'
+import xss from '../dist/xss.js'
 
 class App extends React.Component {
   constructor (props) {
@@ -45,6 +47,8 @@ class App extends React.Component {
         </button>
         <div>textOverflow: {this.state.textOverflow}</div>
         <div>getObjectItemByPath: {getObjectItemByPath(this.state, 'object.path')}</div>
+        <div>moment {moment().format("YYYY-MM-DD HH:mm:ss")}</div>
+        <div>xss {xss.cleanHtml("<strong>hello</strong><script>alert(/xss/);</script>end")}</div>
       </div>
     )
   }

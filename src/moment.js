@@ -1,4 +1,4 @@
-import moment from 'moment'
+const moment = require('moment');
 
 moment.calendarFormat = function (myMoment, now) {
   let diff = myMoment.diff(now, 'days', true)
