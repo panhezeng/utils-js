@@ -1,30 +1,29 @@
-const path = require('path')
-const fs = require('fs')
-const changeCase = require('change-case')
+const path = require("path");
+const fs = require("fs");
+const changeCase = require("change-case");
 
-const RenameWebpackPlugin = require('@panhezeng/rename-webpack-plugin')
-const entry = {}
-const externals = ['moment', 'xss']
+const RenameWebpackPlugin = require("@panhezeng/rename-webpack-plugin");
+const entry = {};
+const externals = ["moment", "xss"];
 try {
-  const files = fs.readdirSync(path.join(__dirname, 'src'))
-  files.forEach(function (fileName) {
-    const name = fileName.replace('.js', '')
-    externals.push(`./${fileName}`)
-    const camelCase = changeCase.camelCase(name)
-    entry[camelCase] = `./src/${fileName}`
-
-  })
+  const files = fs.readdirSync(path.join(__dirname, "src"));
+  files.forEach(function(fileName) {
+    const name = fileName.replace(".js", "");
+    externals.push(`./${fileName}`);
+    const camelCase = changeCase.camelCase(name);
+    entry[camelCase] = `./src/${fileName}`;
+  });
 } catch (e) {
-  return console.log('Unable to scan directory src: ' + e)
+  return console.log("Unable to scan directory src: " + e);
 }
 
 module.exports = {
   entry: entry,
   output: {
-    filename: '[name].js',
-    libraryTarget: 'umd',
+    filename: "[name].js",
+    libraryTarget: "umd",
     umdNamedDefine: true,
-    library: '[name]'
+    library: "[name]"
   },
   externals: externals,
   module: {
@@ -32,14 +31,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: "babel-loader"
       }
     ]
   },
-  plugins: [
-    new RenameWebpackPlugin({naming: 'paramCase'})
-  ]
-}
-
-
-
+  plugins: [new RenameWebpackPlugin({ naming: "paramCase" })]
+};
