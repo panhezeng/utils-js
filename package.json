@@ -27,7 +27,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "moment": "~2",
+    "moment": ">=2.19.3",
     "xss": "~1"
   },
   "browserslist": [
