@@ -28,7 +28,7 @@ class App extends React.Component {
     if (file) {
       this.setState({
         checkUpload: JSON.stringify(
-          await checkUpload(file, file.type, 1, 10, 10)
+          await checkUpload(file, file.type, 1, 50, 50)
         )
       });
     } else {
