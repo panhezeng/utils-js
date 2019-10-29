@@ -23,11 +23,13 @@ class App extends React.Component {
     this.fileInput = React.createRef();
   }
 
-  checkUploadHandle(event) {
+  async checkUploadHandle(event) {
     const file = this.fileInput.current.files[0];
     if (file) {
       this.setState({
-        checkUpload: JSON.stringify(checkUpload(file, file.type, 1))
+        checkUpload: JSON.stringify(
+          await checkUpload(file, file.type, 1, 10, 10)
+        )
       });
     } else {
       this.setState({ checkUpload: "" });

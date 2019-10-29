@@ -11,15 +11,22 @@
  * getObjectItemByPath(object, 'a.b.c', 'default');
  * // => 'default'
  */
-module.exports = function getObjectItemByPath (object, path, defaultValue) {
-  if (Object.prototype.toString.call(object) === '[object Object]' && Object.prototype.toString.call(path) === '[object String]') {
-    const pathArray = path.split('.')
-    let index = 0
-    let length = pathArray.length
-    while (Object.prototype.toString.call(object) === '[object Object]' && index < length) {
-      object = object[pathArray[index++]]
+module.exports = function getObjectItemByPath(object, path, defaultValue) {
+  if (
+    Object.prototype.toString.call(object) === "[object Object]" &&
+    Object.prototype.toString.call(path) === "[object String]" &&
+    path
+  ) {
+    const pathArray = path.split(".");
+    let index = 0;
+    let length = pathArray.length;
+    while (
+      Object.prototype.toString.call(object) === "[object Object]" &&
+      index < length
+    ) {
+      object = object[pathArray[index++]];
     }
-    return (index && index == length) ? object : defaultValue
+    return index && index == length ? object : defaultValue;
   }
-  return defaultValue
-}
+  return defaultValue;
+};
