@@ -15,7 +15,7 @@ module.exports = function getObjectItemByPath(object, path, defaultValue) {
   if (
     Object.prototype.toString.call(object) === "[object Object]" &&
     Object.prototype.toString.call(path) === "[object String]" &&
-    path
+    path !== ""
   ) {
     const pathArray = path.split(".");
     let index = 0;
