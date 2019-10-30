@@ -13,9 +13,11 @@ module.exports = {
   /**
    * 检查上传文件时是否满足要求
    * @param file
-   * @param accept 上传接收文件类型
-   * @param size 单位KB，默认NaN，文件使用默认限制大小，如果不限制大小则传0
-   * @return {{validate: boolean, message: string, error:number}}
+   * @param accept 字符串，上传接收文件类型，默认不限制
+   * @param size 数字，单位KB，文件使用默认限制大小，如果不限制大小则传0
+   * @param width 数字，图片类型宽度限制，默认不限制
+   * @param height 数字，图片类型高度限制，默认不限制
+   * @return {{validation: boolean, message: string, error:number}}
    */
   checkUpload: require("./check-upload.js"),
   /**
@@ -54,7 +56,8 @@ module.exports = {
   getObjectItemByPath: require("./get-object-item-by-path.js"),
   cookies: require("./cookies.js"),
   storage: require("./storage.js"),
-  xss: require("./xss.js")
+  xss: require("./xss.js"),
+  moment: require("./moment.js")
 };
 ```
 
