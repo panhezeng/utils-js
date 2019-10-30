@@ -5,13 +5,13 @@
  * @param size 数字，单位KB，文件使用默认限制大小，如果不限制大小则传0
  * @param width 数字，图片类型宽度限制，默认不限制
  * @param height 数字，图片类型高度限制，默认不限制
- * @return {{validate: boolean, message: string, error:number}}
+ * @return {{validation: boolean, message: string, error:number}}
  */
 module.exports = async function checkUpload(file, accept, size, width, height) {
   const result = {
     message: "",
     error: 0,
-    validate: true
+    validation: true
   };
   if (/^\[object File\]$/.test(Object.prototype.toString.call(file))) {
     if (isNaN(size)) {
@@ -54,7 +54,7 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
         return {
           message: `只能上传${accept}!`,
           error: 1,
-          validate: false
+          validation: false
         };
       }
 
@@ -79,7 +79,7 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
                 reject({
                   message,
                   error: 4,
-                  validate: false
+                  validation: false
                 });
               } else {
                 resolve();
@@ -97,7 +97,7 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
       return {
         message: `只能上传${accept}!`,
         error: 3,
-        validate: false
+        validation: false
       };
     }
     if (size) {
@@ -107,7 +107,7 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
         return {
           message: `上传${typeName}大小不能超过${error}!`,
           error: 2,
-          validate: false
+          validation: false
         };
       }
     }
@@ -115,12 +115,12 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
     return {
       message: "file参数必须为File数据类型",
       error: 1,
-      validate: false
+      validation: false
     };
   }
   return {
     message: "",
     error: 0,
-    validate: true
+    validation: true
   };
 };
