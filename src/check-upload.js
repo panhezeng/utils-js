@@ -42,6 +42,7 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
       }
       if (
         /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
+        accept !== "" &&
         !accept.split(",").some(value => {
           value = value.trim();
           return (
@@ -92,7 +93,8 @@ module.exports = async function checkUpload(file, accept, size, width, height) {
         }
       }
     } else if (
-      /^\[object String\]$/.test(Object.prototype.toString.call(accept))
+      /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
+      accept !== ""
     ) {
       return {
         message: `只能上传${accept}!`,

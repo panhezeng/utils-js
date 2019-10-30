@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 //import { checkUpload } from '../dist/utils-pan.js'
 
 import checkUpload from "../dist/check-upload.js";
+// import checkUpload from "../src/check-upload.js";
 import textOverflow from "../dist/text-overflow.js";
 import getObjectItemByPath from "../dist/get-object-item-by-path.js";
 import moment from "../dist/moment.js";
@@ -27,9 +28,7 @@ class App extends React.Component {
     const file = this.fileInput.current.files[0];
     if (file) {
       this.setState({
-        checkUpload: JSON.stringify(
-          await checkUpload(file, file.type, 1, 50, 50)
-        )
+        checkUpload: JSON.stringify(await checkUpload(file, "", 1, 50, 50))
       });
     } else {
       this.setState({ checkUpload: "" });
