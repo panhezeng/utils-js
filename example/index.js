@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkUpload: "上传检查结果展示",
+      checkUpload: "是否可以上传结果展示",
       textOverflow: "超过3个字省略",
       object: { path: "item" }
     };
@@ -28,7 +28,7 @@ class App extends React.Component {
     const file = this.fileInput.current.files[0];
     if (file) {
       this.setState({
-        checkUpload: JSON.stringify(await checkUpload(file, "", 1, 50, 50))
+        checkUpload: JSON.stringify(await checkUpload(file, "", 0, 50, 50))
       });
     } else {
       this.setState({ checkUpload: "" });

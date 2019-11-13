@@ -7,122 +7,120 @@
  * @param height 数字，图片类型高度限制，默认不限制
  * @return {{validation: boolean, message: string, error:number}}
  */
-module.exports = async function checkUpload(file, accept, size, width, height) {
-  const result = {
-    message: "",
-    error: 0,
-    validation: true
-  };
-  if (/^\[object File\]$/.test(Object.prototype.toString.call(file))) {
-    if (isNaN(size)) {
-      size = 1024000;
-    }
-    let suffix = "";
-    let index = file.name.lastIndexOf(".");
-    if (index !== -1) {
-      suffix = file.name.substring(index);
-    }
-    let typeName = suffix
-      ? suffix.substring(1)
-      : file.type && file.type.split("/")[0];
-
-    if (file.type || suffix) {
+module.exports = function checkUpload(file, accept, size, width, height) {
+  return new Promise(resolve => {
+    if (/^\[object File\]$/.test(Object.prototype.toString.call(file))) {
       if (isNaN(size)) {
-        if (
-          /^\.(png|jpe?g|gif|svg|webp)/.test(suffix) ||
-          /^image/.test(file.type)
-        ) {
-          size = 10240;
-        } else if (
-          /^\.(ogg|mp3|wav|flac|aac)/.test(suffix) ||
-          /^audio/.test(file.type)
-        ) {
-          size = 102400;
-        }
+        size = 1024000;
       }
-      if (
-        /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
-        accept !== "" &&
-        !accept.split(",").some(value => {
-          value = value.trim();
-          return (
-            value &&
-            (new RegExp(`^${value}`).test(file.type) ||
-              new RegExp(`^${value}`).test(suffix))
-          );
-        })
-      ) {
-        return {
-          message: `只能上传${accept}!`,
-          error: 1,
-          validation: false
-        };
+      let suffix = "";
+      let index = file.name.lastIndexOf(".");
+      if (index !== -1) {
+        suffix = file.name.substring(index);
       }
+      let typeName = suffix
+        ? suffix.substring(1)
+        : file.type && file.type.split("/")[0];
 
       if (
-        (/^\.(png|jpe?g|gif|svg|webp)/.test(suffix) ||
-          /^image/.test(file.type)) &&
-        (!isNaN(width) || !isNaN(height))
+        !typeName &&
+        /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
+        accept !== ""
       ) {
-        try {
-          await new Promise(function(resolve, reject) {
-            const image = new Image();
-            image.onload = function() {
-              let message = "";
-              if (!isNaN(width) && image.width > Number(width)) {
-                message += `图片宽度不能超过${width}`;
-              }
-              if (!isNaN(height) && image.height > Number(height)) {
-                if (message) message += "，";
-                message += `图片高度不能超过${height}`;
-              }
-              if (message) {
-                reject({
-                  message,
-                  error: 4,
-                  validation: false
-                });
-              } else {
-                resolve();
-              }
-            };
-            image.src = URL.createObjectURL(file);
-          });
-        } catch (error) {
-          return error;
-        }
-      }
-    } else if (
-      /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
-      accept !== ""
-    ) {
-      return {
-        message: `只能上传${accept}!`,
-        error: 3,
-        validation: false
-      };
-    }
-    if (size) {
-      size = Number(size);
-      if (file.size / 1024 > size) {
-        let error = size >= 1024 ? `${size / 1024}M` : `${size}KB`;
-        return {
-          message: `上传${typeName}大小不能超过${error}!`,
+        resolve({
+          message: `只能上传${accept}!`,
           error: 2,
           validation: false
-        };
+        });
+      } else {
+        if (isNaN(size)) {
+          if (
+            /^\.(png|jpe?g|gif|svg|webp)/.test(suffix) ||
+            /^image/.test(file.type)
+          ) {
+            size = 10240;
+          } else if (
+            /^\.(ogg|mp3|wav|flac|aac)/.test(suffix) ||
+            /^audio/.test(file.type)
+          ) {
+            size = 102400;
+          }
+        }
+        if (size && file.size / 1024 > Number(size)) {
+          let error = size >= 1024 ? `${size / 1024}M` : `${size}KB`;
+          resolve({
+            message: `上传${typeName}大小不能超过${error}!`,
+            error: 3,
+            validation: false
+          });
+        } else if (
+          /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
+          accept !== "" &&
+          !accept.split(",").some(value => {
+            value = value.trim();
+            return (
+              value &&
+              (new RegExp(`^${value}`).test(file.type) ||
+                new RegExp(`^${value}`).test(suffix))
+            );
+          })
+        ) {
+          resolve({
+            message: `只能上传${accept}!`,
+            error: 4,
+            validation: false
+          });
+        } else if (
+          (/^\.(png|jpe?g|gif|svg|webp)/.test(suffix) ||
+            /^image/.test(file.type)) &&
+          (!isNaN(width) || !isNaN(height))
+        ) {
+          const image = new Image();
+          image.onload = function() {
+            let message = "";
+            if (!isNaN(width) && image.width > Number(width)) {
+              message += `图片宽度不能超过${width}`;
+            }
+            if (!isNaN(height) && image.height > Number(height)) {
+              if (message) message += "，";
+              message += `图片高度不能超过${height}`;
+            }
+            if (message) {
+              resolve({
+                message,
+                error: 5,
+                validation: false
+              });
+            } else {
+              resolve({
+                message: "",
+                error: 0,
+                validation: true
+              });
+            }
+          };
+          image.onerror = function() {
+            resolve({
+              message: "无法获取图片宽度高度",
+              error: 6,
+              validation: false
+            });
+          };
+          image.src = URL.createObjectURL(file);
+        } else {
+          resolve({
+            message: "",
+            error: 0,
+            validation: true
+          });
+        }
       }
+    } else {
+      resolve({
+        message: "file参数必须为File数据类型",
+        error: 1,
+        validation: false
+      });
     }
-  } else {
-    return {
-      message: "file参数必须为File数据类型",
-      error: 1,
-      validation: false
-    };
-  }
-  return {
-    message: "",
-    error: 0,
-    validation: true
-  };
+  });
 };
