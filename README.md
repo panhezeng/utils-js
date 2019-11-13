@@ -8,7 +8,7 @@
 
 ## 说明
 
-使用了 Promise, 请自行解决兼容性。
+使用了 Promise, 请自行解决兼容性
 
 ```javascript
 module.exports = {
