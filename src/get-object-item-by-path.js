@@ -13,15 +13,15 @@
  */
 module.exports = function getObjectItemByPath(object, path, defaultValue) {
   if (
-    Object.prototype.toString.call(object) === "[object Object]" &&
-    Object.prototype.toString.call(path) === "[object String]" &&
+    /^\[object Object\]$/.test(Object.prototype.toString.call(object)) &&
+    /^\[object String\]$/.test(Object.prototype.toString.call(path)) &&
     path !== ""
   ) {
     const pathArray = path.split(".");
     let index = 0;
     let length = pathArray.length;
     while (
-      Object.prototype.toString.call(object) === "[object Object]" &&
+      /^\[object Object\]$/.test(Object.prototype.toString.call(object)) &&
       index < length
     ) {
       object = object[pathArray[index++]];
