@@ -8,8 +8,8 @@
  * @return {Promise<{validation: boolean, message: string, error:number}>}
  */
 module.exports = function checkUpload(file, accept, size, width, height) {
-  return new Promise(resolve => {
-    if (/^\[object File\]$/.test(Object.prototype.toString.call(file))) {
+  return new Promise((resolve) => {
+    if (/^\[object File]$/.test(Object.prototype.toString.call(file))) {
       if (isNaN(size)) {
         size = 1024000;
       }
@@ -24,23 +24,23 @@ module.exports = function checkUpload(file, accept, size, width, height) {
 
       if (
         !typeName &&
-        /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
+        /^\[object String]$/.test(Object.prototype.toString.call(accept)) &&
         accept !== ""
       ) {
         resolve({
           message: `只能上传${accept}!`,
           error: 2,
-          validation: false
+          validation: false,
         });
       } else {
         if (isNaN(size)) {
           if (
-            /^\.(png|jpe?g|gif|svg|webp)/.test(suffix) ||
+            /^\.(png|jpe?g|gif|svg|webp)/i.test(suffix) ||
             /^image/.test(file.type)
           ) {
             size = 10240;
           } else if (
-            /^\.(ogg|mp3|wav|flac|aac)/.test(suffix) ||
+            /^\.(ogg|mp3|wav|flac|aac)/i.test(suffix) ||
             /^audio/.test(file.type)
           ) {
             size = 102400;
@@ -51,12 +51,12 @@ module.exports = function checkUpload(file, accept, size, width, height) {
           resolve({
             message: `上传${typeName}大小不能超过${error}!`,
             error: 3,
-            validation: false
+            validation: false,
           });
         } else if (
-          /^\[object String\]$/.test(Object.prototype.toString.call(accept)) &&
+          /^\[object String]$/.test(Object.prototype.toString.call(accept)) &&
           accept !== "" &&
-          !accept.split(",").some(value => {
+          !accept.split(",").some((value) => {
             value = value.trim();
             return (
               value &&
@@ -68,15 +68,15 @@ module.exports = function checkUpload(file, accept, size, width, height) {
           resolve({
             message: `只能上传${accept}!`,
             error: 4,
-            validation: false
+            validation: false,
           });
         } else if (
-          (/^\.(png|jpe?g|gif|svg|webp)/.test(suffix) ||
+          (/^\.(png|jpe?g|gif|svg|webp)/i.test(suffix) ||
             /^image/.test(file.type)) &&
           (!isNaN(width) || !isNaN(height))
         ) {
           const image = new Image();
-          image.onload = function() {
+          image.onload = function () {
             let message = "";
             if (!isNaN(width) && image.width > Number(width)) {
               message += `图片宽度不能超过${width}`;
@@ -89,21 +89,21 @@ module.exports = function checkUpload(file, accept, size, width, height) {
               resolve({
                 message,
                 error: 5,
-                validation: false
+                validation: false,
               });
             } else {
               resolve({
                 message: "",
                 error: 0,
-                validation: true
+                validation: true,
               });
             }
           };
-          image.onerror = function() {
+          image.onerror = function () {
             resolve({
               message: "无法获取图片宽度高度",
               error: 6,
-              validation: false
+              validation: false,
             });
           };
           image.src = URL.createObjectURL(file);
@@ -111,7 +111,7 @@ module.exports = function checkUpload(file, accept, size, width, height) {
           resolve({
             message: "",
             error: 0,
-            validation: true
+            validation: true,
           });
         }
       }
@@ -119,7 +119,7 @@ module.exports = function checkUpload(file, accept, size, width, height) {
       resolve({
         message: "file参数必须为File数据类型",
         error: 1,
-        validation: false
+        validation: false,
       });
     }
   });
