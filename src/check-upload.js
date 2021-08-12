@@ -60,8 +60,8 @@ module.exports = function checkUpload(file, accept, size, width, height) {
             value = value.trim();
             return (
               value &&
-              (new RegExp(`^${value}`).test(file.type) ||
-                new RegExp(`^${value}`).test(suffix))
+              (new RegExp(`^${value}`, "i").test(file.type) ||
+                new RegExp(`^${value}`, "i").test(suffix))
             );
           })
         ) {
