@@ -8,8 +8,13 @@ import checkUpload from "../dist/check-upload.js";
 // import checkUpload from "../src/check-upload.js";
 import textOverflow from "../dist/text-overflow.js";
 import getObjectItemByPath from "../dist/get-object-item-by-path.js";
-import moment from "../dist/moment.js";
-import xss from "../dist/xss.js";
+import moment from "moment";
+import xss from "xss";
+import momentExtend from "../dist/moment-extend.js";
+import xssExtend from "../dist/xss-extend.js";
+
+momentExtend(moment);
+xssExtend(xss);
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +22,7 @@ class App extends React.Component {
     this.state = {
       checkUpload: "是否可以上传结果展示",
       textOverflow: "超过3个字省略",
-      object: { path: "item" }
+      object: { path: "item" },
     };
     this.checkUploadHandle = this.checkUploadHandle.bind(this);
     this.textOverflowHandle = this.textOverflowHandle.bind(this);
@@ -28,7 +33,7 @@ class App extends React.Component {
     const file = this.fileInput.current.files[0];
     if (file) {
       this.setState({
-        checkUpload: JSON.stringify(await checkUpload(file, "", 0, 50, 50))
+        checkUpload: JSON.stringify(await checkUpload(file, "", 0, 50, 50)),
       });
     } else {
       this.setState({ checkUpload: "" });

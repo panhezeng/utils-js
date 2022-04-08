@@ -45,6 +45,6 @@ module.exports = {
   getObjectItemByPath: require("./get-object-item-by-path.js"),
   cookies: require("./cookies.js"),
   storage: require("./storage.js"),
-  xss: require("./xss.js"),
-  moment: require("./moment.js")
+  xssExtend: require("./xss-extend.js"),
+  momentExtend: require("./moment-extend.js"),
 };
