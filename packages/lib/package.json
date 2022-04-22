@@ -1,0 +1,91 @@
+{
+  "name": "@panhezeng/utils",
+  "version": "3.0.0",
+  "description": "A Vue component",
+  "keywords": [
+    "vuejs",
+    "vue component",
+    "tinymce",
+    "rich text editor"
+  ],
+  "homepage": "https://github.com/panhezeng/utils-js#readme",
+  "bugs": {
+    "url": "https://github.com/panhezeng/utils-js/issues",
+    "email": "panhezeng@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "潘何增",
+    "email": "panhezeng@gmail.com",
+    "url": "https://apsay.com/"
+  },
+  "contributors": [],
+  "files": [
+    "dist",
+    "src",
+    "package.json",
+    "README"
+  ],
+  "main": "./dist/utils-pan.js",
+  "typings": "./dist/utils-pan.d.ts",
+  "bin": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panhezeng/utils-js.git"
+  },
+  "scripts": {
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "webpack --mode=production",
+    "build": "npm run build:js && npm run build:types && node scripts/build.mjs",
+    "lint": "cross-env NODE_ENV=production eslint --fix \"src*/**/*.{js,jsx,ts,tsx,vue}\"",
+    "format": "prettier --write \"src*/**/*.{js,jsx,ts,tsx,vue,html,css,less,md,json}\""
+  },
+  "config": {},
+  "devDependencies": {
+    "@babel/core": "7.17.9",
+    "@babel/plugin-proposal-class-properties": "7.16.7",
+    "@babel/plugin-proposal-object-rest-spread": "7.17.3",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/runtime": "^7.17.9",
+    "@babel/preset-env": "7.16.11",
+    "@babel/preset-typescript": "7.16.7",
+    "babel-loader": "8.2.5",
+    "fork-ts-checker-webpack-plugin": "7.2.6",
+    "typescript": "4.6.3",
+    "webpack": "5.72.0",
+    "webpack-cli": "4.9.2",
+    "@babel/eslint-parser": "^7.17.0",
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "ts-morph": "^14.0.0",
+    "zx": "^6.1.0",
+    "@panhezeng/rename-webpack-plugin": "^1.0.4",
+    "change-case": "^4.1.2",
+    "moment": "^2.29.3",
+    "xss": "^1.0.11"
+  },
+  "peerDependencies": {
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6",
+    "yarn": ">=1"
+  },
+  "private": false,
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  }
+}

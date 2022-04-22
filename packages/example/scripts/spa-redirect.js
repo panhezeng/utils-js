@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>utils-pan</title><script>(function () {
+(function () {
   if (location.search) {
     var paramName = "?spa_redirect=";
     if (location.search.indexOf(paramName) !== -1) {
@@ -10,5 +10,3 @@
     }
   }
 })();
-</script>
-   <script defer="defer" src="bundle.js"></script></head><body><div id="root"></div></body></html>
