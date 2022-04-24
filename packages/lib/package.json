@@ -3,10 +3,7 @@
   "version": "3.0.1",
   "description": "A Vue component",
   "keywords": [
-    "vuejs",
-    "vue component",
-    "tinymce",
-    "rich text editor"
+    "utils"
   ],
   "homepage": "https://github.com/panhezeng/utils-js#readme",
   "bugs": {
@@ -27,7 +24,7 @@
     "README"
   ],
   "main": "./dist/utils-pan.js",
-  "typings": "./dist/utils-pan.d.ts",
+  "types": "./dist/utils-pan.d.ts",
   "bin": {},
   "repository": {
     "type": "git",
