@@ -19,10 +19,10 @@ export default {
   setItem(
     sKey: string,
     sValue: string,
-    vEnd: number | string | Date,
-    sPath: string,
-    sDomain: string,
-    bSecure: string
+    vEnd?: number | string | Date,
+    sPath?: string,
+    sDomain?: string,
+    bSecure?: string
   ) {
     if (!sKey || /^(?:expires|max-age|path|domain|secure)$/i.test(sKey)) {
       return false;
@@ -54,7 +54,7 @@ export default {
       (bSecure ? '; secure' : '');
     return true;
   },
-  removeItem(sKey: string, sPath: string, sDomain: string) {
+  removeItem(sKey: string, sPath?: string, sDomain?: string) {
     if (!this.hasItem(sKey)) {
       return false;
     }

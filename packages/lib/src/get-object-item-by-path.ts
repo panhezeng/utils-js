@@ -17,17 +17,15 @@ export default function getObjectItemByPath(
   defaultValue?: any
 ) {
   if (
-    /^\[object Object\]$/.test(Object.prototype.toString.call(object)) &&
-    /^\[object String\]$/.test(Object.prototype.toString.call(path)) &&
+    object &&
+    typeof object === 'object' &&
+    typeof path === 'string' &&
     path !== ''
   ) {
     const pathArray = path.split('.');
     let index = 0;
     const length = pathArray.length;
-    while (
-      /^\[object Object\]$/.test(Object.prototype.toString.call(object)) &&
-      index < length
-    ) {
+    while (object && typeof object === 'object' && index < length) {
       object = object[pathArray[index++]];
     }
     return index && index == length ? object : defaultValue;

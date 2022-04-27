@@ -9,14 +9,14 @@
  */
 export default function checkUpload(
   file: File,
-  accept: string,
-  size: number,
-  width: number,
-  height: number
+  accept?: string,
+  size?: number,
+  width?: number,
+  height?: number
 ) {
   return new Promise((resolve) => {
     if (/^\[object File]$/.test(Object.prototype.toString.call(file))) {
-      if (isNaN(size)) {
+      if (isNaN(Number(size))) {
         size = 1024000;
       }
       let suffix = '';
@@ -39,7 +39,7 @@ export default function checkUpload(
           validation: false,
         });
       } else {
-        if (isNaN(size)) {
+        if (isNaN(Number(size))) {
           if (
             /^\.(png|jpe?g|gif|svg|webp)/i.test(suffix) ||
             /^image/.test(file.type)
@@ -60,7 +60,7 @@ export default function checkUpload(
             validation: false,
           });
         } else if (
-          /^\[object String]$/.test(Object.prototype.toString.call(accept)) &&
+          typeof accept === 'string' &&
           accept !== '' &&
           !accept.split(',').some((value) => {
             value = value.trim();
@@ -79,15 +79,15 @@ export default function checkUpload(
         } else if (
           (/^\.(png|jpe?g|gif|svg|webp)/i.test(suffix) ||
             /^image/.test(file.type)) &&
-          (!isNaN(width) || !isNaN(height))
+          (!isNaN(Number(width)) || !isNaN(Number(height)))
         ) {
           const image = new Image();
           image.onload = function () {
             let message = '';
-            if (!isNaN(width) && image.width > Number(width)) {
+            if (!isNaN(Number(width)) && image.width > Number(width)) {
               message += `图片宽度不能超过${width}`;
             }
-            if (!isNaN(height) && image.height > Number(height)) {
+            if (!isNaN(Number(height)) && image.height > Number(height)) {
               if (message) message += '，';
               message += `图片高度不能超过${height}`;
             }

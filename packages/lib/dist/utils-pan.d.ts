@@ -13,8 +13,8 @@ declare const _default: {
     getObjectItemByPath: typeof getObjectItemByPath;
     cookies: {
         getItem(sKey: string): string | null;
-        setItem(sKey: string, sValue: string, vEnd: string | number | Date, sPath: string, sDomain: string, bSecure: string): boolean;
-        removeItem(sKey: string, sPath: string, sDomain: string): boolean;
+        setItem(sKey: string, sValue: string, vEnd?: string | number | Date | undefined, sPath?: string | undefined, sDomain?: string | undefined, bSecure?: string | undefined): boolean;
+        removeItem(sKey: string, sPath?: string | undefined, sDomain?: string | undefined): boolean;
         hasItem(sKey: string): boolean;
         keys(): string[];
     };

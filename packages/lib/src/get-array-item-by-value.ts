@@ -6,7 +6,7 @@
 export default function getArrayItemByValue(
   array: any[],
   value: any,
-  key: string
+  key?: string
 ) {
   return array.find(function (element) {
     if (key) {

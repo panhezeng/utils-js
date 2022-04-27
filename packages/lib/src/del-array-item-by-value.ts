@@ -6,7 +6,7 @@
 export default function delArrayItemByValue(
   array: any[],
   value: any,
-  key: string
+  key?: string
 ) {
   const delIndex = array.findIndex(function (element) {
     if (key) {
