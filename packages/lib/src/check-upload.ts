@@ -16,9 +16,6 @@ export default function checkUpload(
 ) {
   return new Promise((resolve) => {
     if (/^\[object File]$/.test(Object.prototype.toString.call(file))) {
-      if (isNaN(Number(size))) {
-        size = 1024000;
-      }
       let suffix = '';
       const index = file.name.lastIndexOf('.');
       if (index !== -1) {
@@ -50,6 +47,13 @@ export default function checkUpload(
             /^audio/.test(file.type)
           ) {
             size = 102400;
+          } else if (
+            /^\.(mp4|webm)/i.test(suffix) ||
+            /^video/.test(file.type)
+          ) {
+            size = 10485760;
+          } else {
+            size = 1024000;
           }
         }
         if (size && file.size / 1024 > Number(size)) {
