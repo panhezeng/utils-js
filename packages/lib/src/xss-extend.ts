@@ -13,7 +13,15 @@ export default function (xss: typeof xssType) {
       stripIgnoreTagBody: ['script'], // script标签较特殊，需要过滤标签中间的内容
     })
       .trim()
-      .replace(/&nbsp;/g, '');
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&ldquo;/g, '“')
+      .replace(/&rdquo;/g, '”')
+      .replace(/&lsquo;/g, '‘')
+      .replace(/&rsquo;/g, '’')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&hellip;/g, '…')
+      .replace(/&middot;/g, '·');
   }
 
   Object.defineProperty(xss, 'cleanHtml', {
