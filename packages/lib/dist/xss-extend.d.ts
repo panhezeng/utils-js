@@ -1,4 +1,4 @@
-import xssType from 'xss';
+import xssType, { IFilterXSSOptions } from 'xss';
 export default function (xss: typeof xssType): {
-    cleanHtml: (source: string) => string;
+    cleanHtml: (html: string, options?: IFilterXSSOptions) => string;
 };
