@@ -1,6 +1,6 @@
 {
   "name": "@panhezeng/utils-example",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "private": true,
   "scripts": {
     "build": "webpack --progress --mode=production && node scripts/build.mjs",
@@ -9,7 +9,7 @@
     "format": "prettier --write \"src*/**/*.{js,jsx,ts,tsx,vue,html,css,less,md,json}\""
   },
   "dependencies": {
-    "@panhezeng/utils": "^3.0.4",
+    "@panhezeng/utils": "^3.0.5",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
