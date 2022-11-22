@@ -1,6 +1,6 @@
 import MomentType from 'moment';
 
-export default function (moment: typeof MomentType) {
+export default function momentExtend(moment: typeof MomentType) {
   moment.calendarFormat = function (myMoment, now) {
     const diff = myMoment.diff(now, 'days', true);
     if (myMoment.year() < now.year()) {

@@ -1,5 +1,5 @@
 import MomentType from 'moment';
-export default function (moment: typeof MomentType): {
+export default function momentExtend(moment: typeof MomentType): {
     durationFormatHMS: (seconds: number, { hAlwaysShow, hZeroPadWidth, mZeroPadWidth, sZeroPadWidth, mNoZeroPad, }?: {
         hAlwaysShow?: boolean | undefined;
         hZeroPadWidth?: number | undefined;

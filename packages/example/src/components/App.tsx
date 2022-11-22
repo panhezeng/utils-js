@@ -3,12 +3,28 @@ import React, { useRef, useState } from 'react';
 import checkUpload from '@panhezeng/utils/dist/check-upload';
 import textOverflow from '@panhezeng/utils/dist/text-overflow';
 import getObjectItemByPath from '@panhezeng/utils/dist/get-object-item-by-path';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import weekday from 'dayjs/plugin/weekday';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import duration from 'dayjs/plugin/duration';
+import calendar from 'dayjs/plugin/calendar';
+import zhCn from 'dayjs/locale/zh-cn';
 import xss from 'xss';
-import momentExtend from '@panhezeng/utils/dist/moment-extend';
+import dayjsExtend from '@panhezeng/utils/dist/dayjs-extend';
 import xssExtend from '@panhezeng/utils/dist/xss-extend';
 
-const { durationFormatHMS } = momentExtend(moment);
+const { durationFormatHMS } = dayjsExtend(dayjs, {
+  updateLocale,
+  localizedFormat,
+  weekday,
+  relativeTime,
+  duration,
+  calendar,
+  preset: 'zh-cn',
+  localeObject: zhCn,
+});
 const { cleanHtml } = xssExtend(xss);
 
 export const App = () => {
@@ -48,8 +64,8 @@ export const App = () => {
       <button onClick={textOverflowHandle}>超过3个字加省略符号</button>
       <div>textOverflow: {data.textOverflow}</div>
       <div>getObjectItemByPath: {getObjectItemByPath(data, 'object.path')}</div>
-      <div>moment {moment().format('YYYY-MM-DD HH:mm:ss')}</div>
-      <div>moment durationFormatHMS {durationFormatHMS(3601)}</div>
+      <div>dayjs {dayjs().format('YYYY-MM-DD HH:mm:ss')}</div>
+      <div>dayjs durationFormatHMS {durationFormatHMS(3601)}</div>
       <div>
         xss{': '}
         {cleanHtml('<strong>hello</strong><script>alert(/xss/);</script>end')}

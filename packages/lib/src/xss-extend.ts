@@ -1,6 +1,6 @@
 import xssType, { IFilterXSSOptions } from 'xss';
 
-export default function (xss: typeof xssType) {
+export default function xssExtend(xss: typeof xssType) {
   /**
    * 过滤所有HTML，得到纯文本
    * @param html
