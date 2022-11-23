@@ -26,7 +26,7 @@ export default function dayjsExtend(
     localeObject?: LocaleParameters[0];
   } = {}
 ) {
-  async function i18n(
+  function i18n(
     preset: LocaleParameters[0],
     localeObject: LocaleParameters[0]
   ) {

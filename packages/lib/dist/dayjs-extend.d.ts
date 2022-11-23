@@ -20,7 +20,7 @@ export default function dayjsExtend(dayjs: typeof dayjsType, { updateLocale, loc
         sZeroPadWidth?: number | undefined;
         mNoZeroPad?: boolean | undefined;
     }) => string;
-    i18n: (preset: LocaleParameters[0], localeObject: LocaleParameters[0]) => Promise<void>;
+    i18n: (preset: LocaleParameters[0], localeObject: LocaleParameters[0]) => void;
     formatIos: (format: string) => string;
     getDate: (val: string) => Date;
     getDateByFormat: (format: string) => Date;

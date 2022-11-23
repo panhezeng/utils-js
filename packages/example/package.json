@@ -12,6 +12,8 @@
     "@panhezeng/utils": "^3.0.6",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "moment": "^2.29.4",
+    "dayjs": "^1.11.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
